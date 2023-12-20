@@ -15,8 +15,14 @@
 </template>
 
 <script setup lang="ts">
+const route = useRoute()
+const path = route.path
 const emojis = ['🙃', '😞', '🧐', '😀', '🥳']
+
 const emojiWrapper = ref<HTMLDivElement>()
+
+const myRate = ref<number>(0)
+
 function onChange ():void {
     if(!emojiWrapper.value) return 
     emojiWrapper.value.scrollTo({
@@ -25,5 +31,4 @@ function onChange ():void {
     })
 
 }
-const myRate = ref<number>(0)
 </script>
