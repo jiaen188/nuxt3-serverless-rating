@@ -8,7 +8,7 @@
     </div>
     <div class="text-center leading-8">Your vote: ?</div>
     <div class="rating flex-row-reverse justify-center items-center" @change="onChange">
-        <input type="radio" class="mask mask-star-2 w-10 h-10" v-for="item in 5" :class="{active: item == myRate}" @click="myRate = item" :value="6-item" v-model="myRate">
+        <input type="radio" class="mask mask-star-2 w-10 h-10" v-for="item in 5" :class="{active: 6 - item == myRate}" @click="myRate = item" :value="6 - item" v-model="myRate">
     </div>
     <div class="col-span-2 text-center pt-1"><nuxt-link to="/ranks">ranks</nuxt-link></div>
 </div>
@@ -17,7 +17,12 @@
 <script setup lang="ts">
 const emojis = ['🙃', '😞', '🧐', '😀', '🥳']
 const emojiWrapper = ref<HTMLDivElement>()
-const onChange = () => {
+function onChange ():void {
+    if(!emojiWrapper.value) return 
+    emojiWrapper.value.scrollTo({
+        top: myRate.value * emojiWrapper.value.clientHeight,
+        behavior: 'smooth'
+    })
 
 }
 const myRate = ref<number>(0)
